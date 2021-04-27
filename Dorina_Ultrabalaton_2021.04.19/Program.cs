@@ -9,6 +9,14 @@ namespace Dorina_Ultrabalaton_2021._04._19
 {
     class Program
     {
+        //6.feladat
+        //Függvény írása
+        static double IdőÓrában(string ido)
+        {
+            string[] db = ido.Split(':');//Eldaraboljuk az adott sort ":" mentén
+            return double.Parse(db[0]) + double.Parse(db[1]) / 60 + double.Parse(db[2]) / 3600;
+        }
+
         //Létrehoztuk a struktúrát
         struct Adat
         {
@@ -25,7 +33,7 @@ namespace Dorina_Ultrabalaton_2021._04._19
             //Példányosítjuk a struktúránkat!
             Adat[] adatok = new Adat[500];
 
-            StreamReader olvas = new StreamReader(@"E:\OneDrive - Kisvárdai SZC Móricz Zsigmond Szakgimnáziuma és Szakközépiskolája\Oktatas\Programozas\Jakab_Acs_Eszter\Erettsegi_feladatok\2019_maj_Ultrabalaton\ub2017egyeni.txt");
+            StreamReader olvas = new StreamReader(@"C:\Users\Rendszergazda\Desktop\2019_maj_Ultrabalaton\ub2017egyeni.txt");
             //Első sor beolvasása
             string Elso_sor = olvas.ReadLine();
             int n = 0;
@@ -74,6 +82,14 @@ namespace Dorina_Ultrabalaton_2021._04._19
                 {
                     Console.WriteLine("\tIndult egyéniben a sportoló? Igen");
                     volt_e = true;
+                   if (adatok[i].tavszazalek == 100)
+                    {
+                        Console.WriteLine("\tTeljesítette a teljes távot? Igen");
+                    }
+                    else
+                    {
+                        Console.WriteLine("\tTeljesítette a teljes távot? Nem");
+                    }
                 }
                 /*if (adatok[i].tavszazalek == 100)
                 {
@@ -88,6 +104,23 @@ namespace Dorina_Ultrabalaton_2021._04._19
             {
                 Console.WriteLine("\tIndult egyéniben a sportoló? Nem");
             }
+
+            //7.feladat
+            int szamlalo = 0;
+            double ossz_ora = 0;
+            for (int i = 0;i<n;i++)
+            {
+                if (adatok[i].kategoria == "Ferfi" && adatok[i].tavszazalek == 100)
+                {
+                    szamlalo++;
+                    ossz_ora = ossz_ora + IdőÓrában(adatok[i].versenyido);
+
+                }
+            }
+            double Atlag = ossz_ora / szamlalo;
+            Console.WriteLine("7. feladat: Átlagos idő: " + Atlag + " óra");
+
+            //8.feladat
 
             Console.ReadKey();//Vár egy billentyű leütésére!
         }
